@@ -5,11 +5,13 @@ find $HOME -name "metasploit-*" -type d -exec rm -rf {} \;
 
 
 cwd=$(pwd)
-msfvar=6.0.27
+msfvar=6.0.33
 msfpath='/data/data/com.termux/files/home'
 
 apt update && apt upgrade
-apt install -y libiconv zlib autoconf bison clang coreutils curl findutils git apr apr-util libffi libgmp libpcap postgresql readline libsqlite openssl libtool libxml2 libxslt ncurses pkg-config wget make ruby libgrpc termux-tools ncurses-utils ncurses unzip zip tar termux-elf-cleaner
+# Temporary 
+apt remove ruby -y
+apt install -y libiconv zlib autoconf bison clang coreutils curl findutils git apr apr-util libffi libgmp libpcap postgresql readline libsqlite openssl libtool libxml2 libxslt ncurses pkg-config wget make ruby2 libgrpc termux-tools ncurses-utils ncurses unzip zip tar termux-elf-cleaner
 # Many phones are claiming libxml2 not found error
 ln -sf $PREFIX/include/libxml2/libxml $PREFIX/include/
 
@@ -62,7 +64,8 @@ fi
 
 rm $msfpath/$msfvar.tar.gz
 
-cd ${PREFIX}/bin && curl -LO https://hax4us.github.io/files/msfconsole && chmod +x msfconsole
+cd ${PREFIX}/bin && curl -LO  https://raw.githubusercontent.com/Hax4us/Hax4us.github.io/master/files/msfconsole && chmod +x msfconsole
+
 ln -sf $(which msfconsole) $PREFIX/bin/msfvenom
 
 echo "you can directly use msfvenom or msfconsole rather than ./msfvenom or ./msfconsole."
